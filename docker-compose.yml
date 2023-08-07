@@ -1,0 +1,30 @@
+---
+version: '2'
+services:
+  notification:
+    image: notification:V2.0.0.11
+    hostname: notification
+    container_name: notification
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://172.31.13.39:3306/sme_new?autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=appuser
+      - SPRING_DATASOURCE_PASSWORD=Credable#123
+      - S3_ACCESS_KEY=AKIA4DFFWUPQJUZIA64F
+      - S3_SECRET_KEY=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
+      - S3_SHARED_BUCKET=upscale-dev
+      - S3_PRIVATE_BUCKET=upscale-dev
+      - S3_REGION=ap-south-1
+      - TZ=Asia/Kolkata
+      - NOTIFICATION_DATA_CRON=0 0 10 ? * *
+      - SCHEDULE_EMAIL_CRON=0/30 * * ? * *
+    volumes:
+      - notification:/app
+    ports:
+      - "8095:8095"
+    network_mode: bridge
+volumes:
+  notification:
+networks:
+  default:
+    external:
+      name: bridge
