@@ -7,4 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class TriggerNotificationResponseDTO {
   private Long notificationId;
+
 }
